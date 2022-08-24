@@ -33,5 +33,5 @@ const deleteGoal = (req, res) => {
 
 
 module.exports = {
-    getGoals,
+    getGoals, setGoal, updateGoal, deleteGoal
 }
