@@ -11,7 +11,9 @@ const getGoals = (req, res) => {
 // @access  Private
 
 const setGoal = (req, res) => {
+    console.log(req.body)
     res.status(200).json({ "message": "set goal" })
+    
 }
 
 // @desc    update goals
@@ -29,7 +31,6 @@ const updateGoal = (req, res) => {
 const deleteGoal = (req, res) => {
     res.status(200).json({ "message": `Delete goal ${req.params.id}` })
 }
-
 
 
 module.exports = {
