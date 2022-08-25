@@ -61,11 +61,11 @@ const loginUser = asyncHandler(async (req, res) => {
     const {email, password} = req.body
 
     if (!email) {
-        res.status(403) //vorboden
+        res.status(401) //missing or bad authentication
         throw new Error('email required')
     }
     if (!password) {
-        res.status(403) //vorboden
+        res.status(401) //missing or bad authentication
         throw new Error('password required')
     }
 
@@ -92,7 +92,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
 // @desc    get user info from db
 // @route   GET /api/users/me
-// @access  public
+// @access  private
 const getMe = asyncHandler(async (req, res) => {
     res.json({ "message": "user info from db here"})
 });
