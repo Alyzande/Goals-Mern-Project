@@ -36,7 +36,21 @@ const registerUser = asyncHandler(async (req, res) => {
         password: hashedPassword,
     })
 
-    res.json({ "message": "Register User"})
+    if(user) {
+        //status OK && something was created
+        res.status(201).json({
+            _id: user.id,
+            name: user.name,
+            email: user.email,
+            //token: generateToken(user._id),
+        })
+    } else {
+        res.status(400)
+        throw new Error('Invalid user data')
+    }
+
+    //original testing
+    //res.json({ "message": "Register User"})
 });
 
 // @desc    login/authenticate user
