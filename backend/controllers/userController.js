@@ -21,5 +21,5 @@ const getMe = (req, res) => {
 
 
 module.exports = {
-    registerUser
+    registerUser, loginUser, getMe
 }
