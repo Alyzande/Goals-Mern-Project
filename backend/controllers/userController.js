@@ -42,7 +42,7 @@ const registerUser = asyncHandler(async (req, res) => {
             _id: user.id,
             name: user.name,
             email: user.email,
-            //token: generateToken(user._id),
+            token: generateToken(user._id),
         })
     } else {
         res.status(400)
@@ -78,6 +78,7 @@ const loginUser = asyncHandler(async (req, res) => {
             _id: user.id,
             name: user.name,
             email: user.email,
+            token: generateToken(user._id)
         })
     } else {
         //pw doesn't match. 403 forbidden
@@ -96,6 +97,14 @@ const getMe = asyncHandler(async (req, res) => {
     res.json({ "message": "user info from db here"})
 });
 
+//generate token jwt
+const generateToken = (id) => {
+    //use json web token sign method, id passed into function
+    //expires in 30 days
+    return jwt.sign({ id }, process.env.JWT_SECRET, {
+        expiresIn: '30d',
+      })
+}
 
 module.exports = {
     registerUser, loginUser, getMe
