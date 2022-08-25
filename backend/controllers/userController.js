@@ -57,7 +57,36 @@ const registerUser = asyncHandler(async (req, res) => {
 // @route   POST /api/users/login
 // @access  public
 const loginUser = asyncHandler(async (req, res) => {
-    res.json({ "message": "Authenticate User"})
+    //get email and password sent in body
+    const {email, password} = req.body
+
+    if (!email) {
+        res.status(403) //vorboden
+        throw new Error('email required')
+    }
+    if (!password) {
+        res.status(403) //vorboden
+        throw new Error('password required')
+    }
+
+    //find user by the email
+    const user = await User.findOne({email})
+    //match pw. bcrypt method compare plain pw with hashed pw
+    if (user && (await bcrypt.compare(password, user.password))) {
+        //respond json and send same data back as when registered
+        res.json({
+            _id: user.id,
+            name: user.name,
+            email: user.email,
+        })
+    } else {
+        //pw doesn't match. 403 forbidden
+        res.status(403)
+        throw new Error('Invalid password')
+    }
+
+    //json for testing
+    //res.json({ "message": "Authenticate User"})
 });
 
 // @desc    get user info from db
