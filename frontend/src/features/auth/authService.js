@@ -30,6 +30,7 @@ const login = async (userData) => {
 
 // Logout user
 const logout = () => {
+    //remove user from local storage. rip
   localStorage.removeItem('user')
 }
 
