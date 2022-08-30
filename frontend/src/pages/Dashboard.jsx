@@ -16,36 +16,35 @@ function Dashboard() {
   const {goals, isLoading, isError, message} = useSelector((state) => state.goals);
 
   useEffect(() => {
-    //error
     if (isError) {
       console.log(message)
     }
 
-    //not logged in, redirect to /login page
-    if(!user) {
+    if (!user) {
       navigate('/login')
     }
+
     dispatch(getGoals())
 
-    //return from the use effect
     return () => {
       dispatch(reset())
     }
-
   }, [user, navigate, isError, message, dispatch])
 
-if (isLoading) {
-  return <Spinner />
-}
+  if (isLoading) {
+    return <Spinner />
+  }
 
-  return ( <>
-  <section className='heading'>
-    <h1>Welcome {user && user.name}</h1>
-    <p>Dashboard</p>
-  </section>
-  <GoalForm />
-  
-  <section className='content'>
+  return (
+    <>
+      <section className='heading'>
+        <h1>Welcome {user && user.name}</h1>
+        <p>Goals Dashboard</p>
+      </section>
+
+      <GoalForm />
+
+      <section className='content'>
         {goals.length > 0 ? (
           <div className='goals'>
             {goals.map((goal) => (
@@ -56,9 +55,7 @@ if (isLoading) {
           <h3>You have not set any goals</h3>
         )}
       </section>
-
-  </>
+    </>
   )
 }
-
 export default Dashboard
