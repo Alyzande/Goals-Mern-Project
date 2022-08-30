@@ -20,6 +20,7 @@ export const register = createAsyncThunk(
   async (user, thunkAPI) => {
     try {
       return await authService.register(user)
+      //returning payload from register function in service
     } catch (error) {
       const message =
         (error.response &&
@@ -75,6 +76,7 @@ export const authSlice = createSlice({
         state.isLoading = false
         state.isError = true
         state.message = action.payload
+        //because in catch, call reject *with value*
         state.user = null
       })
       .addCase(login.pending, (state) => {

@@ -29,6 +29,7 @@ const login = async (userData) => {
 }
 
 // Logout user
+// Alternatively could set cookie
 const logout = () => {
     //remove user from local storage. rip
   localStorage.removeItem('user')
