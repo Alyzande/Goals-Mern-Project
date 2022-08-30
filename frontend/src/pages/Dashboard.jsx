@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Spinner from '../components/Spinner';
 import GoalForm from '../components/GoalForm';
 import { getGoals, reset } from '../features/goals/goalSlice';
-//import GoalItem from '../components/GoalItem';
+import GoalItem from '../components/GoalItem';
 
 
 
@@ -46,7 +46,13 @@ if (isLoading) {
   <GoalForm />
   <section className='content'>
     <div className="goals">
-      goals here
+      {goals.length > 0 ? (
+        <div className="goals">
+          {goals.map((goal) => (
+            <GoalItem />
+          ))}
+        </div>
+      ) : (<h3>You have not set any goals </h3>)}
     </div>
   </section>
 
