@@ -20,8 +20,14 @@ function Dashboard() {
 
 
 
-  return (
-    <div>Dashboard</div>
+  return ( <>
+  <section className='heading'>
+    <h1>Welcome {user && user.name}</h1>
+    <p>Dashboard</p>
+  </section>
+  
+
+  </>
   )
 }
 
