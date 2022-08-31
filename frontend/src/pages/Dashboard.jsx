@@ -15,7 +15,6 @@ function Dashboard() {
     (state) => state.goals
   )
 
-  
   useEffect(() => {
     if (isError) {
       console.log(message)
@@ -60,4 +59,4 @@ function Dashboard() {
   )
 }
 
-export default Dashboard
+export default Dashboard 
