@@ -6,12 +6,10 @@ const API_URL = '/api/goals/'
 const createGoal = async (goalData, token) => {
   const config = {
     headers: {
-        //send as a bearer token
       Authorization: `Bearer ${token}`,
     },
   }
 
-  //post request to apiurl, sending goaldata and config which has headers
   const response = await axios.post(API_URL, goalData, config)
 
   return response.data
@@ -43,7 +41,6 @@ const deleteGoal = async (goalId, token) => {
   return response.data
 }
 
-// export object
 const goalService = {
   createGoal,
   getGoals,

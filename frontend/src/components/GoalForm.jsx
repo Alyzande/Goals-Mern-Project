@@ -10,9 +10,7 @@ function GoalForm() {
   const onSubmit = (e) => {
     e.preventDefault()
 
-    //pass in text to the CreateGoal
     dispatch(createGoal({ text }))
-    //clear form
     setText('')
   }
 

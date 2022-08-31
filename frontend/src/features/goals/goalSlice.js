@@ -14,7 +14,6 @@ export const createGoal = createAsyncThunk(
   'goals/create',
   async (goalData, thunkAPI) => {
     try {
-        //get token from auth.user. pass to creategoal in service
       const token = thunkAPI.getState().auth.user.token
       return await goalService.createGoal(goalData, token)
     } catch (error) {
@@ -32,14 +31,11 @@ export const createGoal = createAsyncThunk(
 // Get user goals
 export const getGoals = createAsyncThunk(
   'goals/getAll',
-  // not passing anything, so pass in _ as 1st arg
   async (_, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token
-      //call goal service and pass in token
       return await goalService.getGoals(token)
     } catch (error) {
-        //any problem, spit out error
       const message =
         (error.response &&
           error.response.data &&
@@ -74,27 +70,21 @@ export const goalSlice = createSlice({
   name: 'goal',
   initialState,
   reducers: {
-    // set goals back to original false/empty
     reset: (state) => initialState,
   },
-  //function that takes builder
   extraReducers: (builder) => {
     builder
       .addCase(createGoal.pending, (state) => {
-        //when pending set state isloading true
         state.isLoading = true
       })
       .addCase(createGoal.fulfilled, (state, action) => {
-        //reset false
         state.isLoading = false
         state.isSuccess = true
-        //reduxtoolkit push 
         state.goals.push(action.payload)
       })
       .addCase(createGoal.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
-        //set msg to info sent back from api
         state.message = action.payload
       })
       .addCase(getGoals.pending, (state) => {
